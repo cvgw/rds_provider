@@ -33,7 +33,14 @@ type NewDBClusterInput struct {
 }
 
 func CreateDBCluster(svc *rds.RDS, input NewDBClusterInput) (*rds.DBCluster, error) {
-	return createRDSCluster(svc, NewCreateClusterInput(input))
+	clusterInput := NewCreateClusterInput(input)
+	clusterOutput, err := svc.CreateDBCluster(clusterInput)
+	if err != nil {
+		log.Warn(err)
+		return nil, err
+	}
+
+	return clusterOutput.DBCluster, nil
 }
 
 func NewCreateClusterInput(input NewDBClusterInput) *rds.CreateDBClusterInput {
@@ -74,14 +81,4 @@ func NewCreateClusterInput(input NewDBClusterInput) *rds.CreateDBClusterInput {
 	}
 
 	return clusterInput
-}
-
-func createRDSCluster(svc *rds.RDS, clusterInput *rds.CreateDBClusterInput) (*rds.DBCluster, error) {
-	clusterOutput, err := svc.CreateDBCluster(clusterInput)
-	if err != nil {
-		log.Warn(err)
-		return nil, err
-	}
-
-	return clusterOutput.DBCluster, nil
 }

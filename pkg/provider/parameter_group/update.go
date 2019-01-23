@@ -50,10 +50,7 @@ func (r *UpdateRequest) SetParameters(params []Param) *UpdateRequest {
 }
 
 func UpdateDBParameterGroup(svc *rds.RDS, req UpdateRequest) error {
-	input := &rds.ModifyDBParameterGroupInput{
-		DBParameterGroupName: aws.String(req.name),
-		Parameters:           req.parameters,
-	}
+	input := NewModifyDBParameterGroupInput(req)
 
 	result, err := svc.ModifyDBParameterGroup(input)
 	if err != nil {
@@ -77,4 +74,13 @@ func UpdateDBParameterGroup(svc *rds.RDS, req UpdateRequest) error {
 	log.Debug(result)
 
 	return nil
+}
+
+func NewModifyDBParameterGroupInput(req UpdateRequest) *rds.ModifyDBParameterGroupInput {
+	input := &rds.ModifyDBParameterGroupInput{
+		DBParameterGroupName: aws.String(req.name),
+		Parameters:           req.parameters,
+	}
+
+	return input
 }

@@ -31,11 +31,7 @@ func (r *CreateRequest) SetDescription(v string) *CreateRequest {
 func CreateDBParameterGroup(svc *rds.RDS, req CreateRequest) (
 	*rds.DBParameterGroup, error,
 ) {
-	input := &rds.CreateDBParameterGroupInput{
-		DBParameterGroupFamily: aws.String(req.family),
-		DBParameterGroupName:   aws.String(req.name),
-		Description:            aws.String(req.description),
-	}
+	input := NewCreateDBParameterGroupInput(req)
 
 	result, err := svc.CreateDBParameterGroup(input)
 	if err != nil {
@@ -58,4 +54,14 @@ func CreateDBParameterGroup(svc *rds.RDS, req CreateRequest) (
 	}
 
 	return result.DBParameterGroup, nil
+}
+
+func NewCreateDBParameterGroupInput(req CreateRequest) *rds.CreateDBParameterGroupInput {
+	input := &rds.CreateDBParameterGroupInput{
+		DBParameterGroupFamily: aws.String(req.family),
+		DBParameterGroupName:   aws.String(req.name),
+		Description:            aws.String(req.description),
+	}
+
+	return input
 }
