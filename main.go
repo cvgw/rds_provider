@@ -1,3 +1,7 @@
-package rds_provider
+package main
 
-func main() {}
+import "github.com/cvgw/rds_provider/cmd"
+
+func main() {
+	cmd.Execute()
+}

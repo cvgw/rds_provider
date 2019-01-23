@@ -1,0 +1,7 @@
+{
+  "name": "test-subnet-group",
+  "description": "a test subnet group",
+  "subnet_ids": [
+    "meow-1"
+  ]
+}
