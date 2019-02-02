@@ -8,23 +8,23 @@ import (
 )
 
 type CreateRequest struct {
-	family      string
-	name        string
-	description string
+	Family      string
+	Name        string
+	Description string
 }
 
 func (r *CreateRequest) SetFamily(v string) *CreateRequest {
-	r.family = v
+	r.Family = v
 	return r
 }
 
 func (r *CreateRequest) SetName(v string) *CreateRequest {
-	r.name = v
+	r.Name = v
 	return r
 }
 
 func (r *CreateRequest) SetDescription(v string) *CreateRequest {
-	r.description = v
+	r.Description = v
 	return r
 }
 
@@ -58,9 +58,9 @@ func CreateDBParameterGroup(svc *rds.RDS, req CreateRequest) (
 
 func NewCreateDBParameterGroupInput(req CreateRequest) *rds.CreateDBParameterGroupInput {
 	input := &rds.CreateDBParameterGroupInput{
-		DBParameterGroupFamily: aws.String(req.family),
-		DBParameterGroupName:   aws.String(req.name),
-		Description:            aws.String(req.description),
+		DBParameterGroupFamily: aws.String(req.Family),
+		DBParameterGroupName:   aws.String(req.Name),
+		Description:            aws.String(req.Description),
 	}
 
 	return input
