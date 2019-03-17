@@ -14,6 +14,7 @@ type UpdateDBInstanceRequest struct {
 	engine             string
 	class              string
 	parameterGroupName string
+	publiclyAccessible bool
 }
 
 func (req *UpdateDBInstanceRequest) SetId(v string) *UpdateDBInstanceRequest {
@@ -43,6 +44,11 @@ func (req *UpdateDBInstanceRequest) SetClass(v string) *UpdateDBInstanceRequest 
 
 func (req *UpdateDBInstanceRequest) SetParameterGroupName(v string) *UpdateDBInstanceRequest {
 	req.parameterGroupName = v
+	return req
+}
+
+func (req *UpdateDBInstanceRequest) SetPubliclyAccessible(v bool) *UpdateDBInstanceRequest {
+	req.publiclyAccessible = v
 	return req
 }
 

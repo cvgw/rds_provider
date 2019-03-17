@@ -30,6 +30,8 @@ type NewDBInstanceInput struct {
 	MonitoringRoleArn string
 	// Name of RDS Instance ParameterGroup to use (optional)
 	ParameterGroupName string
+	// Whethere the instance should be assigned a public IP
+	PubliclyAccessible bool
 }
 
 // CreateDBClusterInstance create a new RDS instance from the supplied NewDBInstanceInput
@@ -51,6 +53,7 @@ func NewCreateDBInstanceInput(input NewDBInstanceInput) *rds.CreateDBInstanceInp
 		DBInstanceIdentifier:    aws.String(input.InstanceIdentifier),
 		DBClusterIdentifier:     aws.String(input.ClusterIdentifier),
 		Engine:                  aws.String(input.Engine),
+		PubliclyAccessible:      aws.Bool(input.PubliclyAccessible),
 	}
 
 	if input.EngineVersion != "" {
